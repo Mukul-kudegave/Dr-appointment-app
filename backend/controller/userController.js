@@ -2,6 +2,7 @@ import { catchAsycnErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/errorMiddleware.js";
 import { User } from "../models/userSchema.js";
 import { generateTokens } from "../utils/jwtToken.js";
+import cloudinary from "cloudinary";
 
 export const PatientRegister = catchAsycnErrors(async (req, res, next) => {
   const {
@@ -155,5 +156,77 @@ export const logoutPatient = catchAsycnErrors(async (req, res, next) => {
     });
 });
 
-
-// export const 
+export const addNewDoctor = catchAsycnErrors(async (req, res, next) => {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    return next(new ErrorHandler("Doctor Avatar Required", 400));
+  }
+  const { docAvatar } = req.files;
+  const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
+  if (!allowedFormats.includes(docAvatar.mimetype)) {
+    return next(new ErrorHandler("File Format Not Supported!", 400));
+  }
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    Aadhar,
+    dob,
+    gender,
+    password,
+    doctorDepartment,
+  } = req.body;
+  if (
+    !firstName ||
+    !lastName ||
+    !email ||
+    !phone ||
+    !Aadhar ||
+    !dob ||
+    !gender ||
+    !password ||
+    !doctorDepartment ||
+    !docAvatar
+  ) {
+    return next(new ErrorHandler("Please Fill Full Form!", 400));
+  }
+  const isRegistered = await User.findOne({ email });
+  if (isRegistered) {
+    return next(
+      new ErrorHandler("Doctor With This Email Already Exists!", 400)
+    );
+  }
+  const cloudinaryResponse = await cloudinary.uploader.upload(
+    docAvatar.tempFilePath
+  );
+  if (!cloudinaryResponse || cloudinaryResponse.error) {
+    console.error(
+      "Cloudinary Error:",
+      cloudinaryResponse.error || "Unknown Cloudinary error"
+    );
+    return next(
+      new ErrorHandler("Failed To Upload Doctor Avatar To Cloudinary", 500)
+    );
+  }
+  const doctor = await User.create({
+    firstName,
+    lastName,
+    email,
+    phone,
+    Aadhar,
+    dob,
+    gender,
+    password,
+    role: "Doctor",
+    doctorDepartment,
+    docAvatar: {
+      public_id: cloudinaryResponse.public_id,
+      url: cloudinaryResponse.secure_url,
+    },
+  });
+  res.status(200).json({
+    success: true,
+    message: "New Doctor Registered Successfully",
+    doctor,
+  });
+});
