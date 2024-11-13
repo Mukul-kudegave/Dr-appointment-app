@@ -7,7 +7,7 @@ const messageSchema = new mongoose.Schema({
     required: true,
     minLength: [3, "First name contain at least 3 character"],
   },
-  lasttName: {
+  lastName: {
     type: String,
     required: true,
     minLength: [3, "Last name contain at least 3 character"],
@@ -15,7 +15,7 @@ const messageSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    validator: [validator.isEmail, "Please provide valid email"],
+    validate: [validator.isEmail, "Please provide valid email"],
   },
   phone: {
     type: String,
