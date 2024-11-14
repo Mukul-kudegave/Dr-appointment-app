@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
-import mongoose from "mongoose";
 import validator from "validator";
-// import bycrpt from "bcrypt";
-// import jwt from "jsonwebtoken";
+import bycrpt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 const appointmentSchema = new mongoose.Schema({
   firstName: {
@@ -59,9 +58,10 @@ const appointmentSchema = new mongoose.Schema({
         required:true,
     },
   },
-  hasvisited:{
+  hasVisited:{
     type:Boolean,
     required:true,
+    default:false,
   },
   doctorId:{
     type:mongoose.Schema.ObjectId,
@@ -81,7 +81,6 @@ const appointmentSchema = new mongoose.Schema({
     default:"Pending",
   },
 });
-
 
 
 export const Appointment = mongoose.model("Appointment", appointmentSchema);

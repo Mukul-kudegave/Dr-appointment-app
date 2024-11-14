@@ -230,3 +230,4 @@ export const addNewDoctor = catchAsycnErrors(async (req, res, next) => {
     doctor,
   });
 });
+ 
