@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <Hero
         title={
-          "Welcome to the DocSchedule Medical Institute | Your Trusted Helthcare Provider"
+          "Appointments Made Easy, Health Made Priority."
         }
         imageUrl={"/hero.png"}
       />
@@ -21,3 +21,5 @@ const Home = () => {
 };
 
 export default Home;
+
+

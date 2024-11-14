@@ -94,6 +94,7 @@ h6 {
 .hero .banner p {
   color: #111;
   letter-spacing: 2px;
+  text-align: justify;
 }
 .hero .banner span {
   position: absolute;
@@ -438,9 +439,10 @@ nav {
   align-items: center;
   border-bottom-right-radius: 7px;
   border-bottom-left-radius: 7px;
-  padding-top: 20px !important;
-  padding-bottom: 20px !important;
+  /* padding-top: 10px !important;
+  padding-bottom: 10px !important; */
   z-index: 2;
+  /* background-color: whitesmoke; */
 }
 nav .logo {
   flex: 1;
