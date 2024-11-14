@@ -19,6 +19,7 @@ const AppWrapper = () => {
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    
     <AppWrapper />
   </StrictMode>
 );
