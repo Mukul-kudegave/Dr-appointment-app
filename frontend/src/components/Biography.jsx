@@ -1,6 +1,6 @@
-import React from "react";
+// import React from "react";
 
-const Biography = ({ imageUrl }) => {
+const Biography = ({imageUrl}) => {
   return (
     <>
       <div className="container biography">
@@ -8,7 +8,6 @@ const Biography = ({ imageUrl }) => {
           <img src={imageUrl} alt="whoweare" />
         </div>
         <div className="banner">
-          {/* <p>Biography</p> */}
           <h3>Our Story</h3>
           <p>
             DocSchedule was founded with a simple mission: to make healthcare
@@ -26,15 +25,12 @@ const Biography = ({ imageUrl }) => {
             and advanced scheduling technology to give patients the seamless
             experience they deserve.
           </p>
-          {/* <p>We are working on a MERN STACK PROJECT.</p> */}
           <p>
             Every day, we work to improve and expand DocSchedule to better serve
             our users, ensuring that they can prioritize their health without
             the hassle of traditional scheduling. Join us in making healthcare
             more connected and more compassionate.
           </p>
-          {/* <p>Lorem ipsum dolor sit amet!</p>
-          <p>Coding is fun!</p> */}
         </div>
       </div>
     </>

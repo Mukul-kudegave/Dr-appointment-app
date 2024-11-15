@@ -70,7 +70,7 @@ export const login = catchAsycnErrors(async (req, res, next) => {
   if (role !== user.role) {
     return next(new ErrorHandler("User with this role not found!", 400));
   }
-  generateTokens(user, "User Register Successfully", 200, res);
+  generateTokens(user, "User Login Successfully", 200, res);
 });
 
 export const addNewAdmin = catchAsycnErrors(async (req, res, next) => {

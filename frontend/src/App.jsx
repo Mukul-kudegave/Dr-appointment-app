@@ -11,6 +11,8 @@ import Login from './pages/Login';
 import Appointment from './pages/Appointment';
 import AboutUs from './pages/AboutUs';
 import Register from './pages/Register';
+import AppointmentForm from './pages/Appointment';
+import Footer from './components/Footer';
 
 
  const App = () => {
@@ -42,11 +44,12 @@ import Register from './pages/Register';
         <Navbar/>
         <Routes>
           <Route path='/' element={<Home/>}/>
-          <Route path='/appointment' element={<Appointment/>}/>
+          <Route path='/appointment' element={<AppointmentForm/>}/>
           <Route path='/about' element={<AboutUs/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/login' element={<Login/>}/>
         </Routes>
+        <Footer/>
         <ToastContainer position='top-center'/>
       </Router>
       </>
