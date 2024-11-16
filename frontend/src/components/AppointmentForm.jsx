@@ -1,5 +1,5 @@
 import axios from "axios";
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -38,7 +38,7 @@ const AppointmentForm = () => {
         { withCredentials: true }
       );
       setDoctors(data.doctors);
-    //   console.log(data.doctors);
+      console.log(data.doctors);
     };
     fetchDoctors();
   }, []);
@@ -165,9 +165,12 @@ const AppointmentForm = () => {
               })}
             </select>
             <select
-              value={`${doctorFirstName} ${doctorLastName}`}
+              value={JSON.stringify({
+                firstName: doctorFirstName,
+                lastName: doctorLastName,
+              })}
               onChange={(e) => {
-                const [firstName, lastName] = e.target.value.split(" ");
+                const { firstName, lastName } = JSON.parse(e.target.value);
                 setDoctorFirstName(firstName);
                 setDoctorLastName(lastName);
               }}
@@ -178,7 +181,10 @@ const AppointmentForm = () => {
                 .filter((doctor) => doctor.doctorDepartment === department)
                 .map((doctor, index) => (
                   <option
-                    value={`${doctor.firstName} ${doctor.lastName}`}
+                    value={JSON.stringify({
+                      firstName: doctor.firstName,
+                      lastName: doctor.lastName,
+                    })}
                     key={index}
                   >
                     {doctor.firstName} {doctor.lastName}
